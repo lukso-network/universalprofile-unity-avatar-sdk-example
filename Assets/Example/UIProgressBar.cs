@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace AvatarSDKExample
 {
+    /// <summary>
+    /// Simple progress bar to show in the UI. Because I couldn't find one in the Unity UI. Stretches an image to show progress
+    /// </summary>
     public class UIProgressBar : MonoBehaviour
     {
         public Image progressImage;

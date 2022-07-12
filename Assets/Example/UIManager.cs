@@ -57,6 +57,9 @@ namespace AvatarSDKExample
             loadProgressBar.gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// Lods universal profile. Called from the load button in the UI
+        /// </summary>
         public void LoadProfile()
         {
             string address = inputUPAddress.text;
@@ -66,15 +69,19 @@ namespace AvatarSDKExample
             if(address.StartsWith("0x"))
             {
                 labelUPStatus.text = "Loading remote profile...";
-                upGetter.GetProfile(address, OnProfileLoaded, Debug.LogException);
+                upGetter.GetProfile(address, OnProfileLoaded, OnLoadFailed);
             }
-            else
+            else // Local lsp3 json was mostly used for testing
             {
                 labelUPStatus.text = "Loading local LSP3 JSON...";
-                upGetter.GetProfileLocal(address, OnProfileLoaded, Debug.LogException);
+                upGetter.GetProfileLocal(address, OnProfileLoaded, OnLoadFailed);
             }
         }
 
+        /// <summary>
+        /// Setup profile and avatar dropdowns in the UI
+        /// </summary>
+        /// <param name="up"></param>
         void OnProfileLoaded(UniversalProfile up)
         {
             if(loadProgressBar)
@@ -87,6 +94,7 @@ namespace AvatarSDKExample
 
             loadedProfile = up;
 
+            // Set options for the avatar dropdown and filtered dropdown in the UI
             availableAvatars = up.Avatars;
             availableAvatarsPlatformFiltered = up.Avatars.Where(av => av.UPAvatarIsForCurrentPlatform()).ToArray();
 
@@ -98,6 +106,9 @@ namespace AvatarSDKExample
             OnAvatarDropdownChanged();
         }
 
+        /// <summary>
+        /// Start avatar loading coroutine and enable progress bar
+        /// </summary>
         public void LoadAvatar()
         {
             if(loadedProfile == null)
@@ -117,20 +128,50 @@ namespace AvatarSDKExample
                 : availableAvatars;
             UPAvatar avatar = avatars[dropdownAvailableAvatars.value];
             labelUPStatus.text = $"Loading avatar {avatar.Hash}";
-            StartCoroutine(AvatarCache.LoadAvatar(avatar, OnAvatarLoaded, OnAvatarLoadFailed, OnLoadProgressChanged));
+            StartCoroutine(AvatarCache.LoadAvatar(avatar, OnAvatarLoaded, OnLoadFailed, OnLoadProgressChanged));
         }
 
+        /// <summary>
+        /// Updates the progress bar
+        /// </summary>
+        /// <param name="percent">Percent to set the progress bar to</param>
         void OnLoadProgressChanged(float percent)
         {
             loadProgressBar.SetPercent(percent);
         }
 
-        void OnAvatarLoadFailed(Exception ex)
+        /// <summary>
+        /// Called when profile download or avatar load fails. Update status label and clear old profile data
+        /// </summary>
+        /// <param name="ex"></param>
+        void OnLoadFailed(Exception ex)
         {
             if(loadProgressBar)
                 loadProgressBar.gameObject.SetActive(false);
+            labelUPStatus.text = $"Failed: {ex.Message}";
+            ClearOldProfileData();
+        }
+        
+        /// <summary>
+        /// Clears old profile data from the UI
+        /// </summary>
+        void ClearOldProfileData()
+        {
+            loadedProfile = null;
+            labelUPName.text = "None";
+            labelUPDescription.text = null;
+            
+            availableAvatars = Array.Empty<UPAvatar>();
+            availableAvatarsPlatformFiltered = Array.Empty<UPAvatar>();
+
+            avatarDropdownOptions = new List<Dropdown.OptionData>();
+            avatarDropdownOptionsPlatformFiltered = new List<Dropdown.OptionData>();
         }
 
+        /// <summary>
+        /// Destroys the old avatar if it exists and instantiates the newly loaded one. 
+        /// </summary>
+        /// <param name="avatar">Avatar to instantiate</param>
         void OnAvatarLoaded(GameObject avatar)
         {
             labelUPStatus.text = $"Loaded avatar!";
@@ -152,6 +193,9 @@ namespace AvatarSDKExample
             loadedAvatar.rotationSpeed = avatarRotationSpeed;
         }
 
+        /// <summary>
+        /// Switches between platform filtered avatar list and all avatar list
+        /// </summary>
         public void OnFilterAvatarsToggleChanged()
         {
             dropdownAvailableAvatars.options = toggleFilterToCurrentPlatform.isOn
@@ -159,8 +203,12 @@ namespace AvatarSDKExample
                 : avatarDropdownOptions;
 
             dropdownAvailableAvatars.value = 0;
+            dropdownAvailableAvatars.enabled = dropdownAvailableAvatars.options.Count > 0;
         }
 
+        /// <summary>
+        /// Updates selected avatar in the UI
+        /// </summary>
         public void OnAvatarDropdownChanged()
         {
             var avatars = toggleFilterToCurrentPlatform.isOn ? availableAvatarsPlatformFiltered : availableAvatars;
