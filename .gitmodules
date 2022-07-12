@@ -1,0 +1,3 @@
+[submodule "Assets/UniversalProfileAvatarSDK"]
+	path = Assets/UniversalProfileAvatarSDK
+	url = https://github.com/rurre/UniversalProfileAvatarSDK
