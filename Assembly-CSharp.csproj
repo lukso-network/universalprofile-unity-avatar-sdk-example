@@ -52,22 +52,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Definitions\UniversalProfile.cs" />
      <Compile Include="Assets\Example\UIAvatar.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\BundleLoaders\RemoteAvatarBundleLoader.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\AvatarCache.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\BundleLoaders\AvatarBundleLoaderBase.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Definitions\UPAvatar.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Helpers\AvatarSDKUtils.cs" />
      <Compile Include="Assets\Example\UIProgressBar.cs" />
      <Compile Include="Assets\Example\UPGetter.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Helpers\UPAvatarExtensions.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Exceptions\NullResponseException.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\AvatarSDK.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Helpers\AvatarSDKDelegates.cs" />
      <Compile Include="Assets\Example\UIManager.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\Definitions\ERC725DefinitionStripped.cs" />
-     <Compile Include="Assets\UniversalProfileAvatarSDK\Scripts\AvatarSDKConfig.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.30f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -829,6 +817,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UniversalProfileAvatarSDK.csproj">
+      <Project>{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}</Project>
+      <Name>UniversalProfileAvatarSDK</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

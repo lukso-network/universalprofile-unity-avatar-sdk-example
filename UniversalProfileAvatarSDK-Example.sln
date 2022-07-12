@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalProfileAvatarSDK", "UniversalProfileAvatarSDK.csproj", "{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{5eabfc5f-8d6b-85f8-0209-2160cbb5cfd4}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{db8d017e-6b8b-09e2-8e9d-8ac9cd50cec0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5eabfc5f-8d6b-85f8-0209-2160cbb5cfd4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5eabfc5f-8d6b-85f8-0209-2160cbb5cfd4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5eabfc5f-8d6b-85f8-0209-2160cbb5cfd4}.Release|Any CPU.ActiveCfg = Release|Any CPU
